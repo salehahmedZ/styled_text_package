@@ -86,6 +86,7 @@ class IconStyle extends TextStyle {
 
 class StyledText extends StatefulWidget {
   final String text;
+    
   final bool autoLineBreak;
   final TextStyle style;
   final Map<String, TextStyle> styles;
@@ -141,7 +142,6 @@ class _StyledTextState extends State<StyledText> {
   // Parse text
   void _updateTextSpans() {
     if (_text != widget.text) {
-       
       _text = widget.text; 
         
       _textSpans = null;
