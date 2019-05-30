@@ -141,12 +141,8 @@ class _StyledTextState extends State<StyledText> {
   // Parse text
   void _updateTextSpans() {
     if (_text != widget.text) {
-        
-      if(widget.autoLineBreak) {
-        _text = widget.text.replaceAll("\n", "<br></br>");
-      }else{
-        _text = widget.text;
-      }
+       
+      _text = widget.text; 
         
       _textSpans = null;
       TextStyle defaultStyle =
@@ -154,9 +150,16 @@ class _StyledTextState extends State<StyledText> {
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
+      
+      String text;
+      if (widget.autoLineBreak) {
+        text =  _text.replaceAll("\n", "<br></br>");
+      } else {
+       text = _text;
+      }
 
-      var xmlStreamer = new XmlStreamer(
-          '<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
+      var xmlStreamer = new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + text + '</root>');
+        
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
